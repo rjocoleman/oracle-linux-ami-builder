@@ -1,0 +1,58 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 8192,
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Oracle_64",
+      "http_directory": "http",
+      "iso_checksum": "5728ef4b431d28a2d4ad62dbdf5bf36d",
+      "iso_checksum_type": "md5",
+      "iso_url": "{{user `mirror`}}/OracleLinux-R7-U1-Server-x86_64-dvd.iso",
+      "ssh_password": "ec2-user",
+      "ssh_port": 22,
+      "ssh_username": "ec2-user",
+      "ssh_wait_timeout": "10000s",
+      "output_directory": "output",
+      "shutdown_command": "echo 'ec2-user'|sudo -S /sbin/halt -h -p",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "480"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "1"
+        ]
+      ],
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "oracle-7.1-x86_64"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [],
+      "execute_command": "echo 'ec2-user' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "scripts": [
+        "scripts/sshd.sh",
+        "scripts/ec2.sh",
+        "scripts/cleanup.sh",
+        "scripts/minimize.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "box_basename": "oracle-7.1",
+    "name": "oracle-7.1",
+    "mirror": "http://mirrors.dotsrc.org/oracle-linux/OL7/u1/x86_64/"
+  }
+}

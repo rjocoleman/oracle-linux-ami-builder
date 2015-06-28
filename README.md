@@ -14,14 +14,14 @@ Somewhat inspired by Chef's [Bento](https://github.com/chef/bento).
 
 ## Features
 
-* 8GB configured disk size + Growpart on first boot (to assume full size of allocated storage like stock AMIs).
+* Single partition - grows on first boot (to assume full size of allocated storage like stock AMIs).
 * Compressed size around 430MB.
 * `cloud-init` for configuration and retrieval of authorized SSH keys on first boot.
 * Username `ec2-user` (added to sudoers). Password locked (login via key only).
 * No root SSH login, root password locked.
 * No password based SSH login - keys only.
 * Uses RHCK kernel, can be set to UEK on or after first boot.
-* No VirtualBox cruft left in the resulting image.
+* No VirtualBox cruft in the resulting image.
 
 
 ## First time

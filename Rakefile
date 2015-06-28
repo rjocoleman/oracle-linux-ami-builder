@@ -127,4 +127,4 @@ namespace :aws do
   end
 end
 
-task all: ['packer:build', 'aws:upload', 'aws:import_image']
+task default: ['packer:build', 'aws:upload', 'aws:import_image']

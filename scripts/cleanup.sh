@@ -1,10 +1,17 @@
 #!/bin/bash -eux
-# These were only needed for building VMware/Virtualbox extensions:
-yum -y remove gcc cpp kernel-devel kernel-headers perl
-yum -y clean all
-rm -rf VBoxGuestAdditions_*.iso VBoxGuestAdditions_*.iso.?
 
-rm /home/ec2-user/.vbox_version
+yum clean all
+truncate -c -s 0 /var/log/yum.log
+rm -f /root/anaconda-ks.cfg
+rm -f /etc/ssh/ssh_host_*
+rm -f /etc/resolv.conf
+rm -f /root/.bash_history
+rm -f /root/.nano_history
+rm -f /root/.lesshst
+rm -f /root/.ssh/known_hosts
+rm -rf /tmp/*
+for k in $(find /var/log -type f); do echo > $k; done
+for k in $(find /tmp -type f); do rm -f $k; done
 
 # clean up redhat interface persistence
 rm -f /etc/udev/rules.d/70-persistent-net.rules

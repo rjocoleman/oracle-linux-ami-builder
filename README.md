@@ -4,7 +4,7 @@ Uses Packer and VirtualBox to install and configure a basic Amazon Machine Image
 
 Uploads VirtualBox image to AWS and imports it as an AMI that can be used within EC2.
 
-* Currently supports Oracle 7.1 x86_64.
+* Currently supports Oracle 7.2 x86_64.
 * Depends on [Packer](http://packer.io)
 * Depends on [VirtualBox](http://virtualbox.org)
 * Creates AMI in the AWS region you've set in ENV.

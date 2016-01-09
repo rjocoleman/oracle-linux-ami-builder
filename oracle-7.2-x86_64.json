@@ -9,9 +9,9 @@
       "guest_additions_mode": "disable",
       "guest_os_type": "Oracle_64",
       "http_directory": "http",
-      "iso_checksum": "5728ef4b431d28a2d4ad62dbdf5bf36d",
-      "iso_checksum_type": "md5",
-      "iso_url": "{{user `mirror`}}/OracleLinux-R7-U1-Server-x86_64-dvd.iso",
+      "iso_checksum": "03e048f23d798c8e8e7935fab76245c2f1341378",
+      "iso_checksum_type": "sha1",
+      "iso_url": "{{user `mirror`}}/OracleLinux-R7-U2-Server-x86_64-dvd.iso",
       "ssh_password": "ec2-user",
       "ssh_port": 22,
       "ssh_username": "ec2-user",
@@ -33,7 +33,7 @@
           "1"
         ]
       ],
-      "vm_name": "oracle-7.1-x86_64"
+      "vm_name": "oracle-7.2-x86_64"
     }
   ],
   "provisioners": [
@@ -50,8 +50,8 @@
     }
   ],
   "variables": {
-    "box_basename": "oracle-7.1",
-    "name": "oracle-7.1",
-    "mirror": "http://mirrors.dotsrc.org/oracle-linux/OL7/u1/x86_64/"
+    "box_basename": "oracle-7.2",
+    "name": "oracle-7.2",
+    "mirror": "http://mirrors.dotsrc.org/oracle-linux/OL7/u2/x86_64/"
   }
 }

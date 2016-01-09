@@ -5,7 +5,7 @@ require 'awesome_print'
 namespace :packer do
   desc 'Upload VMDK to with Packer'
   task :build do
-    system 'packer build --force oracle-7.1-x86_64.json'
+    system 'packer build --force oracle-7.2-x86_64.json'
   end
 end
 
@@ -14,20 +14,20 @@ namespace :aws do
   task :upload => :dotenv do
     s3 = Aws::S3::Resource.new
     puts 'Uploading VMDK'
-    s3.bucket(ENV.fetch('S3_BUCKET')).object('oracle-7.1-x86_64-disk1.vmdk').upload_file('output/oracle-7.1-x86_64-disk1.vmdk')
+    s3.bucket(ENV.fetch('S3_BUCKET')).object('oracle-7.2-x86_64-disk1.vmdk').upload_file('output/oracle-7.2-x86_64-disk1.vmdk')
     puts 'Upload Complete'
   end
 
   desc 'Import the VMDK to EC2 (create an AMI)'
   task :import_image => :dotenv do
     s3 = Aws::S3::Resource.new
-    object = s3.bucket(ENV.fetch('S3_BUCKET')).object('oracle-7.1-x86_64-disk1.vmdk')
+    object = s3.bucket(ENV.fetch('S3_BUCKET')).object('oracle-7.2-x86_64-disk1.vmdk')
     payload = {
       dry_run: false,
-      description: 'Oracle Linux 7.1 x64',
+      description: 'Oracle Linux 7.2 x64',
       disk_containers: [
         {
-          description: 'Oracle Linux 7.1 x64',
+          description: 'Oracle Linux 7.2 x64',
           url: object.presigned_url(:get, expires_in: 3600),
         },
       ],
